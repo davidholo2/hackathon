@@ -8,7 +8,7 @@ screen_width = 1000
 screen_height = 600
 
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Brawler")
+pygame.display.set_caption("FIGHT GAME")
 
 # set framerate
 clock = pygame.time.Clock()
@@ -56,8 +56,8 @@ warrior_animation_steps = [10, 8, 1, 7, 7, 3, 7]
 wizard_animation_steps = [8, 8, 1, 8, 8, 3, 7]
 
 # font
-count_font = pygame.font.Font("assets/fonts/turok.ttf", 80)
-score_font = pygame.font.Font("assets/fonts/turok.ttf", 30)
+count_font = pygame.font.Font("assets/fonts/Blazed.ttf", 80)
+score_font = pygame.font.Font("assets/fonts/Blazed.ttf", 30)
 
 # drawing text
 
@@ -114,7 +114,7 @@ while run:
     else:
         # count timer
         draw_text(str(intro_count), count_font, red,
-                  screen_width / 2, screen_height / 3)
+                  screen_width / 2-50, screen_height / 3)
         if (pygame.time.get_ticks() - last_count_update) >= 1000:
             intro_count -= 1
             last_count_update = pygame.time.get_ticks()
