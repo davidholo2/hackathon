@@ -4,10 +4,10 @@ from fighter import Fighter
 pygame.init()
 
 # game window
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 600
+screen_width = 1000
+screen_height = 600
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Brawler")
 
 # set framerate
@@ -15,26 +15,26 @@ clock = pygame.time.Clock()
 
 
 # colours
-RED = (255, 0, 0)
-YELLOW = (0, 255, 255)
-WHITE = (255, 255, 255)
+red = (255, 0, 0)
+blue = (0, 255, 255)
+white = (255, 255, 255)
 
 # game variables
 intro_count = 3
 last_count_update = pygame.time.get_ticks()
 score = [0, 0]  # player scores. [P1, P2]
 round_over = False
-ROUND_OVER_COOLDOWN = 2000
+round_over_cooldown = 2000
 
 # variables player
-WARRIOR_SIZE = 162
-WARRIOR_SCALE = 4
-WARRIOR_OFFSET = [72, 56]
-WARRIOR_DATA = [WARRIOR_SIZE, WARRIOR_SCALE, WARRIOR_OFFSET]
-WIZARD_SIZE = 250
-WIZARD_SCALE = 3
-WIZARD_OFFSET = [112, 107]
-WIZARD_DATA = [WIZARD_SIZE, WIZARD_SCALE, WIZARD_OFFSET]
+warrior_size = 162
+warrior_scale = 4
+warrior_offset = [72, 56]
+warrior_data = [warrior_size, warrior_scale, warrior_offset]
+wizard_size = 250
+wizard_scale = 3
+wizard_offset = [112, 107]
+wizard_data = [wizard_size, wizard_scale, wizard_offset]
 
 
 # bg
@@ -47,13 +47,13 @@ warrior_sheet = pygame.image.load(
 wizard_sheet = pygame.image.load(
     "assets/images/wizard/Sprites/wizard.png").convert_alpha()
 
-# vicory image
+# victory image
 victory_img = pygame.image.load(
     "assets/images/icons/victory.png").convert_alpha()
 
 # number of steps in each animation
-WARRIOR_ANIMATION_STEPS = [10, 8, 1, 7, 7, 3, 7]
-WIZARD_ANIMATION_STEPS = [8, 8, 1, 8, 8, 3, 7]
+warrior_animation_steps = [10, 8, 1, 7, 7, 3, 7]
+wizard_animation_steps = [8, 8, 1, 8, 8, 3, 7]
 
 # font
 count_font = pygame.font.Font("assets/fonts/turok.ttf", 80)
@@ -70,7 +70,7 @@ def draw_text(text, font, text_col, x, y):
 
 
 def draw_bg():
-    scaled_bg = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    scaled_bg = pygame.transform.scale(bg_image, (screen_width, screen_height))
     screen.blit(scaled_bg, (0, 0))
 
 # drawing fighter health bars
@@ -78,16 +78,16 @@ def draw_bg():
 
 def draw_health_bar(health, x, y):
     ratio = health / 100
-    pygame.draw.rect(screen, WHITE, (x - 2, y - 2, 404, 34))
-    pygame.draw.rect(screen, RED, (x, y, 400, 30))
-    pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 30))
+    pygame.draw.rect(screen, white, (x - 2, y - 2, 404, 34))
+    pygame.draw.rect(screen, red, (x, y, 400, 30))
+    pygame.draw.rect(screen, blue, (x, y, 400 * ratio, 30))
 
 
 # two instances of fighters
-fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA,
-                    warrior_sheet, WARRIOR_ANIMATION_STEPS)
-fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA,
-                    wizard_sheet, WIZARD_ANIMATION_STEPS)
+fighter_1 = Fighter(1, 200, 310, False, warrior_data,
+                    warrior_sheet, warrior_animation_steps)
+fighter_2 = Fighter(2, 700, 310, True, wizard_data,
+                    wizard_sheet, wizard_animation_steps)
 
 # game loop
 run = True
@@ -101,20 +101,20 @@ while run:
     # player stats
     draw_health_bar(fighter_1.health, 20, 20)
     draw_health_bar(fighter_2.health, 580, 20)
-    draw_text("Player1: " + str(score[0]), score_font, RED, 20, 60)
-    draw_text("Player2: " + str(score[1]), score_font, RED, 580, 60)
+    draw_text("Player1: " + str(score[0]), score_font, red, 20, 60)
+    draw_text("Player2: " + str(score[1]), score_font, red, 580, 60)
 
     # update countdown
     if intro_count <= 0:
         # move
-        fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT,
+        fighter_1.move(screen_width, screen_height,
                        screen, fighter_2, round_over)
-        fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT,
+        fighter_2.move(screen_width, screen_height,
                        screen, fighter_1, round_over)
     else:
         # count timer
-        draw_text(str(intro_count), count_font, RED,
-                  SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
+        draw_text(str(intro_count), count_font, red,
+                  screen_width / 2, screen_height / 3)
         if (pygame.time.get_ticks() - last_count_update) >= 1000:
             intro_count -= 1
             last_count_update = pygame.time.get_ticks()
@@ -137,13 +137,13 @@ while run:
             round_over_time = pygame.time.get_ticks()
     else:
         screen.blit(victory_img, (360, 150))
-        if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
+        if pygame.time.get_ticks() - round_over_time > round_over_cooldown:
             round_over = False
             intro_count = 3
-            fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA,
-                                warrior_sheet, WARRIOR_ANIMATION_STEPS)
-            fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA,
-                                wizard_sheet, WIZARD_ANIMATION_STEPS)
+            fighter_1 = Fighter(1, 200, 310, False, warrior_data,
+                                warrior_sheet, warrior_animation_steps)
+            fighter_2 = Fighter(2, 700, 310, True, wizard_data,
+                                wizard_sheet, wizard_animation_steps)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
