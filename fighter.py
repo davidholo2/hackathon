@@ -89,7 +89,7 @@ class Fighter():
                     # determine which attack type was used
                     if key[pygame.K_k]:
                         self.attack_type = 1
-
+                    elif key[pygame.K_l]:
                         self.attack_type = 2
 
         # gravity
