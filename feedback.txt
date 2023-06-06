@@ -1,0 +1,10 @@
+David
+This game is truly engaging! Game coding can easily become disorganized, 
+so I recommend using more comments for clarity. Decorators could also be beneficial in this case. 
+You've used OOP effectively, but the use of an API (to offer some form of reward to the winner, 
+for example) and a database (for login and score storage) could enhance the game. 
+Please add a requirements.txt with instructions and necessary modules respectively.
+Python OOP: 10/10
+Databases: 0/10
+API/JSON: 0/10
+General score: 7
